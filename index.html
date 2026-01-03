@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>辰空天文社 - 探索宇宙奥秘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #0a0a1a;
+            color: #e0e0ff;
+            overflow-x: hidden;
+        }
+        
+        /* 首页样式 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 10, 30, 0.4), rgba(10, 10, 30, 0.7)), url('photo-1465101162946-4377e57745c3.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(100, 150, 255, 0.7);
+            letter-spacing: 3px;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            animation: fadeIn 3s ease-out;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #a0a0ff;
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        /* 功能区样式 */
+        .features {
+            min-height: 100vh;
+            padding: 100px 5%;
+            background-color: rgba(15, 15, 35, 0.95);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: #7aa2f7;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #7aa2f7, transparent);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: rgba(25, 25, 50, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(100, 150, 255, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #bb9af7;
+            text-align: center;
+        }
+        
+        .feature-card p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .software-list {
+            list-style-type: none;
+        }
+        
+        .software-list li {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+        }
+        
+        .software-list a {
+            color: #7aa2f7;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .software-list a:hover {
+            color: #bb9af7;
+            text-decoration: underline;
+        }
+        
+        /* 活动展示区样式 */
+        .activities {
+            min-height: 100vh;
+            padding: 100px 5%;
+            background: linear-gradient(rgba(10, 10, 30, 0.8), rgba(10, 10, 30, 0.9)), url('YOUR_ACTIVITIES_BG_IMAGE_PATH_HERE') no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .activity-card {
+            background: rgba(25, 25, 50, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .activity-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .activity-img {
+            height: 200px;
+            background-color: #2a2a5a;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .activity-content {
+            padding: 25px;
+        }
+        
+        .activity-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #bb9af7;
+        }
+        
+        .activity-content p {
+            line-height: 1.6;
+        }
+        
+        /* 活动详情页面样式 */
+        .activity-detail {
+            min-height: 100vh;
+            padding: 100px 5%;
+            background: rgba(15, 15, 35, 0.95);
+            display: none;
+            position: relative;
+        }
+        
+        .detail-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .detail-header h2 {
+            font-size: 2.5rem;
+            color: #7aa2f7;
+            margin-bottom: 20px;
+        }
+        
+        .detail-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .detail-img {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .detail-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        /* 修复返回按钮样式 - 移动到右上角 */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 25px;
+            background: #7aa2f7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-button:hover {
+            background: #5a82d7;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* 活动照片展示样式 */
+        .activities-gallery {
+            margin-top: 50px;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .activity-session {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: rgba(25, 25, 50, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+        }
+        
+        .session-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .session-title {
+            font-size: 1.8rem;
+            color: #bb9af7;
+            margin-bottom: 10px;
+        }
+        
+        .session-date {
+            font-size: 1.2rem;
+            color: #7aa2f7;
+        }
+        
+        .session-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .photo-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .photo-caption {
+            padding: 15px;
+            background: rgba(20, 20, 40, 0.9);
+            text-align: center;
+        }
+        
+        .photo-date {
+            font-size: 0.9rem;
+            color: #a0a0ff;
+            margin-bottom: 5px;
+        }
+        
+        .photo-description {
+            font-size: 0.95rem;
+            color: #e0e0ff;
+        }
+        
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+        
+        .pagination-button {
+            padding: 8px 16px;
+            background: rgba(100, 150, 255, 0.2);
+            color: #e0e0ff;
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination-button:hover {
+            background: rgba(100, 150, 255, 0.4);
+        }
+        
+        .pagination-button.active {
+            background: #7aa2f7;
+            color: white;
+            border-color: #7aa2f7;
+        }
+        
+        .pagination-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-button:disabled:hover {
+            background: rgba(100, 150, 255, 0.2);
+        }
+        
+        .pagination-info {
+            margin: 0 15px;
+            color: #a0a0ff;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(100, 150, 255, 0.3);
+        }
+        
+        .modal-caption {
+            text-align: center;
+            padding: 15px;
+            color: white;
+            background: rgba(20, 20, 40, 0.9);
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-button:hover {
+            color: #7aa2f7;
+        }
+        
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(100, 150, 255, 0.3);
+            color: white;
+            border: none;
+            font-size: 30px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .prev-button {
+            left: 20px;
+        }
+        
+        .next-button {
+            right: 20px;
+        }
+        
+        .nav-button:hover {
+            background: rgba(100, 150, 255, 0.6);
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+            
+            .features-grid, .activities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .detail-img {
+                height: 250px;
+            }
+            
+            .photos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-button {
+                font-size: 20px;
+                padding: 5px 10px;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+            
+            /* 移动端返回按钮调整 */
+            .back-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 首页 -->
+    <section class="hero" id="home" style="background: linear-gradient(rgba(10, 10, 30, 0.4), rgba(10, 10, 30, 0.7)), url('images/photo-1465101162946-4377e57745c3.jpg') no-repeat center center fixed; background-size: cover;">
+        <h1>辰空天文社</h1>
+        <p>探索宇宙奥秘，共享星空之美</p>
+        <div class="scroll-indicator">向下滑动探索更多</div>
+    </section>
+    
+    <!-- 功能区 -->
+    <section class="features" id="features">
+        <h2 class="section-title">天文资源与介绍</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <h3>天文软件推荐</h3>
+                <p>适合初学者的天文观测与学习软件：</p>
+                <ul class="software-list">
+                    <li><a href="https://stellarium.org/" target="_blank">Stellarium - 免费开源的天象模拟软件</a></li>
+                    <li><a href="https://skyviewcafe.com/" target="_blank">SkyView Cafe - 交互式星空地图</a></li>
+                    <li><a href="https://www.nasa.gov/" target="_blank">NASA App - 官方NASA应用</a></li>
+                    <li><a href="https://www.google.com/sky/" target="_blank">Google Sky - 在线星空浏览器</a></li>
+                    <li><a href="https://www.mobileobservatory.com/" target="_blank">Mobile Observatory - 移动天文台</a></li>
+                </ul>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <h3>社团介绍</h3>
+                <p>辰空天文社是一个致力于推广天文科学、组织天文观测活动、培养天文爱好者的学生社团。</p>
+                <p>我们定期举办观星活动、天文讲座、天文摄影比赛等，欢迎所有对宇宙充满好奇的同学加入我们！</p>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <h3>天文知识</h3>
+                <p>宇宙是由大约138亿年前的大爆炸形成的，目前仍在不断膨胀。</p>
+                <p>我们的太阳系位于银河系的猎户臂上，距离银河系中心约2.6万光年。</p>
+                <p>光年是距离单位，指光在真空中一年内传播的距离，约为9.46万亿公里。</p>
+                <p>黑洞是宇宙中引力极强的区域，连光也无法逃脱其引力。</p>
+                <p>目前已知的系外行星数量已超过5000颗，其中一些可能具备生命存在的条件。</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 活动展示区 -->
+    <section class="activities" id="activities">
+        <h2 class="section-title">社团活动</h2>
+        <div class="activities-grid">
+            <div class="activity-card fade-in" data-activity="star-gazing">
+                <div class="activity-img" style="background-image: url('images/preview.jpg')"></div>
+                <div class="activity-content">
+                    <h3>观星之夜</h3>
+                    <p>不定期观星活动，使用专业天文望远镜观测月球、行星、星云和星系。适合所有级别的天文爱好者参加。</p>
+                </div>
+            </div>
+            
+            <div class="activity-card fade-in" data-activity="astro-photography">
+                <div class="activity-img" style="background-image: url('images/487bef95a486a63f595a1f7dc29d82eb.jpg')"></div>
+                <div class="activity-content">
+                    <h3>天文社团出游</h3>
+                    <p>记录每一次社团出游活动如游川师，成信，以及四川天文联合会举办的大型活动</p>
+                </div>
+            </div>
+            
+            <div class="activity-card fade-in" data-activity="lecture-series">
+                <div class="activity-img" style="background-image: url('images/1f30a4ee5cfc81003fbf0e492477b9f5.jpg')"></div>
+                <div class="activity-content">
+                    <h3>天文社杂项</h3>
+                    <p>历代会长照片墙，星图ing以及一些美好回忆。考虑以后在此处扩展功能。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 活动详情页面 -->
+    <section class="activity-detail" id="activity-detail">
+        <!-- 返回按钮现在放在这里，但通过CSS定位到右上角 -->
+        <button class="back-button" id="back-button">返回活动列表</button>
+        
+        <div class="detail-header">
+            <h2 id="detail-title">活动详情</h2>
+        </div>
+        <div class="detail-content">
+            <div class="detail-img" id="detail-image"></div>
+            <div class="detail-text" id="detail-text">
+                <!-- 活动详情内容将通过JavaScript动态填充 -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- 图片模态框 -->
+    <div class="modal" id="imageModal">
+        <span class="close-button" id="closeModal">&times;</span>
+        <button class="nav-button prev-button" id="prevButton">&#10094;</button>
+        <div class="modal-content-container">
+            <img class="modal-content" id="modalImage" src="" alt="">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+        <button class="nav-button next-button" id="nextButton">&#10095;</button>
+    </div>
+
+    <script>
+    // 在 DOMContentLoaded 外部定义分页相关函数
+    // 分页状态管理
+    let paginationState = {
+        currentPage: 1,
+        currentActivity: '',
+        itemsPerPage: 5 // 每页显示2个活动，便于测试分页效果
+    };
+
+    // 渲染分页控件
+    function renderPaginationControls(activityId, currentPage, totalItems) {
+        const paginationId = activityId + '-pagination';
+        const paginationContainer = document.getElementById(paginationId);
+        
+        if (!paginationContainer) return;
+        
+        const totalPages = Math.ceil(totalItems / paginationState.itemsPerPage);
+        
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+        
+        let paginationHTML = '';
+        
+        // 上一页按钮
+        if (currentPage > 1) {
+            paginationHTML += `<button class="pagination-button prev-btn" data-activity="${activityId}" data-page="${currentPage - 1}">上一页</button>`;
+        } else {
+            paginationHTML += `<button class="pagination-button" disabled>上一页</button>`;
+        }
+        
+        // 页码信息
+        paginationHTML += `<span class="pagination-info">第 ${currentPage} 页 / 共 ${totalPages} 页</span>`;
+        
+        // 下一页按钮
+        if (currentPage < totalPages) {
+            paginationHTML += `<button class="pagination-button next-btn" data-activity="${activityId}" data-page="${currentPage + 1}">下一页</button>`;
+        } else {
+            paginationHTML += `<button class="pagination-button" disabled>下一页</button>`;
+        }
+        
+        // 添加页面跳转（可选）
+        if (totalPages > 5) {
+            paginationHTML += `<div style="display: flex; align-items: center; margin-left: 15px;">
+                <span style="margin-right: 10px;">跳转到:</span>
+                <select class="page-select" data-activity="${activityId}" style="background: rgba(25, 25, 50, 0.8); color: #e0e0ff; border: 1px solid rgba(100, 150, 255, 0.3); border-radius: 5px; padding: 5px;">
+                    ${Array.from({length: totalPages}, (_, i) => i + 1)
+                        .map(page => `<option value="${page}" ${page === currentPage ? 'selected' : ''}>${page}</option>`)
+                        .join('')}
+                </select>
+            </div>`;
+        }
+        
+        paginationContainer.innerHTML = paginationHTML;
+        
+        // 添加事件监听器
+        addPaginationEventListeners();
+    }
+
+    // 添加分页事件监听器
+    function addPaginationEventListeners() {
+        // 上一页/下一页按钮事件
+        document.querySelectorAll('.pagination-button.prev-btn, .pagination-button.next-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const activityId = this.getAttribute('data-activity');
+                const page = parseInt(this.getAttribute('data-page'));
+                // 通过自定义事件传递分页请求
+                document.dispatchEvent(new CustomEvent('paginationChange', {
+                    detail: { activityId, page }
+                }));
+            });
+        });
+        
+        // 页面跳转下拉菜单事件
+        document.querySelectorAll('.page-select').forEach(select => {
+            select.addEventListener('change', function() {
+                const activityId = this.getAttribute('data-activity');
+                const page = parseInt(this.value);
+                document.dispatchEvent(new CustomEvent('paginationChange', {
+                    detail: { activityId, page }
+                }));
+            });
+        });
+    }
+
+    // 滚动动画效果
+    document.addEventListener('DOMContentLoaded', function() {
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+          initModalEvents(); // 初始化模态框事件监听器
+        // 活动详情数据
+        const activityData = {
+            'star-gazing': {
+                title: '观星之夜',
+                image: 'images/社团活动/群相册/NRMAVjN0V0lrMUp2TXE0VjNmZzZRZAUAcXVuZ3o!.jpeg',
+                content: `
+                    <p>观星之夜是辰空天文社每月一次的经典活动，通常在天气晴朗的夜晚举行。</p>
+                    <p>活动内容包括：</p>
+                    <ul>
+                        <li>使用专业天文望远镜观测月球表面细节</li>
+                        <li>寻找并观测行星，如木星、土星、火星等</li>
+                        <li>观测深空天体，如星云、星团和星系</li>
+                        <li>学习星座识别和星空导航技巧</li>
+                        <li>天文摄影基础教学</li>
+                    </ul>
+                    <p>活动适合所有级别的天文爱好者，无论您是初学者还是资深爱好者，都能在观星之夜找到乐趣。</p>
+                    
+                    <!-- 照片展示区域 -->
+                    <div class="activities-gallery" style="margin-top: 50px;">
+                        <h3 style="text-align: center; color: #bb9af7; margin-bottom: 30px;">往期活动照片</h3>
+                        <div class="gallery-container" id="star-gazing-gallery">
+                            <!-- 照片将通过JavaScript动态生成 -->
+                        </div>
+                        <!-- 分页控件 -->
+                        <div class="pagination" id="star-gazing-pagination">
+                            <!-- 分页按钮将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                `
+            },
+            'astro-photography': {
+                title: '天文社团出游',
+                image: 'images/134A94046B8131002C88C5F36DC4FEA2.jpg',
+                content: `
+                    <p>天文社团出游主要包括我们社团受邀参加的其他高校天文社团活动和社团团建出游活动。</p>
+                    <p>内容包括：</p>
+                    <ul>
+                        <li>出游四川大学</li>
+                        <li>出游成都理工大学</li>
+                        <li>出游成都信息工程大学</li>
+                        <li>出游四川师范大学</li>
+                        <li>社团团建</li>
+                    </ul>
+                    <p>如想参加请积极关注我们的QQ群。</p>
+                    
+                    <!-- 照片展示区域 -->
+                    <div class="activities-gallery" style="margin-top: 50px;">
+                        <h3 style="text-align: center; color: #bb9af7; margin-bottom: 30px;">往期活动照片</h3>
+                        <div class="gallery-container" id="astro-photography-gallery">
+                            <!-- 照片将通过JavaScript动态生成 -->
+                        </div>
+                        <!-- 分页控件 -->
+                        <div class="pagination" id="astro-photography-pagination">
+                            <!-- 分页按钮将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                `
+            },
+            'lecture-series': {
+                title: '天文社杂项',
+                image: '会长/微信图片_20260102203205_4_2.jpg',
+                content: `
+                    <p></p>
+                    <p></p>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <p></p>
+                    
+                    <!-- 照片展示区域 -->
+                    <div class="activities-gallery" style="margin-top: 50px;">
+                        <h3 style="text-align: center; color: #bb9af7; margin-bottom: 30px;">往期活动照片</h3>
+                        <div class="gallery-container" id="lecture-series-gallery">
+                            <!-- 照片将通过JavaScript动态生成 -->
+                        </div>
+                        <!-- 分页控件 -->
+                        <div class="pagination" id="lecture-series-pagination">
+                            <!-- 分页按钮将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                `
+            }
+        };
+        
+        // 观星之夜活动照片数据
+        const starGazingPhotos = [
+            {
+                title: "星空",
+                date: "2025",
+                description: "",
+                photos: [
+                    {
+                        src: "Mr_Yang/0CB88569F788C6B04FA783EDF6B858BD.jpg",
+                        date: "2025年12月17日",
+                        description: "群星急射而来，让我想起了星际穿越里的穿越虫洞"
+                    },
+                    {
+                        src: "Mr_Yang/1A3E77B574CF92E5FF7EDBFCBDD37307.jpg",
+                        date: "2025年12月17日",
+                        description: "玫瑰星云 第一次用朋友的设备拍的深空，第一次入坑深空"
+                    },
+                    {
+                        src: "Mr_Yang/665C5F6E8B8B3F6635DD5A02BA488700.jpg",
+                        date: "",
+                        description: "凉山谷克德"
+                    },
+                    {
+                        src: "Mr_Yang/螺旋星轨.jpg",
+                        date: "2024年1月",
+                        description: "群星螺旋犹如嬉笑"
+                    },
+                    {
+                        src: "Mr_Yang/螺旋星轨2.jpg",
+                        date: "2024年1月",
+                        description: "川南"
+                    },
+                    {
+                        src: "Mr_Yang/星轨2.jpg",
+                        date: "2024年1月",
+                        description: "川南"
+                    },
+                     {
+                        src: "Mr_Yang/AC17F79309A43F23840A50ED023DF979.jpg",
+                        date: "",
+                        description: "在凉山谷克得所拍，当时才入坑星空摄影不久，和朋友在二级区蹲了一夜，第一次到二级区，震撼无以言表，是照片表达不出来的。"
+                    },
+                     {
+                        src: "Mr_Yang/B19008B3AA0E841F3CC6EA7A0F708D0D.jpg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "Mr_Yang/D3006094DB239FE8A4F673D45049B82C.jpg",
+                        date: "",
+                        description: "凉山谷克德"
+                    },
+                   
+                ]
+            },
+             {
+                title: "2025年双子座最大流星雨",
+                date: "2025年12月17日",
+                description: "由25届杨鳆盛在川南天文台拍摄",
+                photos: [
+                    {
+                        src: "images/25_12_双子座流星雨_杨鳆盛/25.12双子座流星雨/NR8AVjViQ1FBMk5ERXdOREkzTnpZaDhVRnAqb2luRHchIQUAcXVuZ3o!.jpeg",
+                        date: "2025年12月17日",
+                        description: "双子座流星雨像是从猎户座的星云穿来,整个冬银河清晰可见"
+                    },
+                    {
+                        src: "images/25_12_双子座流星雨_杨鳆盛/25.12双子座流星雨/NR8AVjViQ1FBMk5ERXdOREkzTnpZajhVRnBxWm1ORHchIQUAcXVuZ3o!.jpeg",
+                        date: "2025年12月17日",
+                        description: ""
+                    },
+                    {
+                        src: "images/25_12_双子座流星雨_杨鳆盛/25.12双子座流星雨/NR8AVjViQ1FBMk5ERXdOREkzTnpZaThVRnBBbTZORHchIQUAcXVuZ3o!.jpeg",
+                        date: "2025年12月17日",
+                        description: ""
+                    },
+                    {
+                        src: "images/25_12_双子座流星雨_杨鳆盛/25.12双子座流星雨/NR8AVjViQ1FBMk5ERXdOREkzTnpZazhVRnB6SXlBRHchIQUAcXVuZ3o!.jpeg",
+                        date: "2025年12月17日",
+                        description: ""
+                    },
+                    {
+                        src: "images/25_12_双子座流星雨_杨鳆盛/25.12双子座流星雨/NR8AVjViQ1FBMk5ERXdOREkzTnpZbDhVRnBaWEtBRHchIQUAcXVuZ3o!.jpeg",
+                        date: "2025年12月17日",
+                        description: ""
+                    },
+                    {
+                        src: "images/25_12_双子座流星雨_杨鳆盛/25.12双子座流星雨/NR8AVjViQ1FBMk5ERXdOREkzTnpZbThVRnB4bW1BRHchIQUAcXVuZ3o!.jpeg",
+                        date: "2025年12月17日",
+                        description: "看着和上面那张一样，但是多了两颗流星。"
+                    },
+                   
+                ]
+            },
+            {
+                title: "冬季观星",
+                date: "2025年11月26日",
+                description: "在下沉广场观察月亮。",
+                photos: [
+                    {
+                        src: "images/487bef95a486a63f595a1f7dc29d82eb.jpg",
+                        date: "2025年11月26日",
+                        description: "昴宿星团"
+                    },
+                    {
+                        src: "images/49c1323b02fb5741fd2e4ab90a5798ac.jpg",
+                        date: "2025年11月26日",
+                        description: "和摄影社的一次出摊"
+                    },
+                    {
+                        src: "images/8b5fc5d08612faf0fdc538ccb332cba8.jpg",
+                        date: "2025年11月27日",
+                        description: "猎户座星云"
+                    },
+                    {
+                        src: "images/d03704e78958a6f0876017d5968806ae.jpg",
+                        date: "2025年11月27日",
+                        description: ""
+                    }
+                ]
+            },
+            {
+                title: "夏季观星",
+                date: "2025年8月29号",
+                description: "",
+                photos: [
+                    {
+                        src: "images/164a9ee87738b3dc299f5816edfa7af1.jpg",
+                        date: "2025年8月29日",
+                        description: "凌晨的天狼星（左）和猎户座（右）"
+                    },
+                     {
+                        src: "images/1e627dd12ca5cc1809ea9e63fddfa0ce.jpg",
+                        date: "2025年8月29日",
+                        description: "飞马座"
+                    },
+                     {
+                        src: "images/社团活动/群相册/NRMAVjN0V0lrMUp0RkYxVjBLTWNnUwUAcXVuZ3o!.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "images/社团活动/群相册/NRMAVjN0V0lrMUpnLk5tVjBoaDlNVwUAcXVuZ3o!.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                
+                    
+                ]
+            },
+            {
+                title: "2025年12月5日出摊",
+                date: "2025年12月5日",
+                description: "观测2025年最大月亮",
+                photos: [
+                    {
+                        src: "images/2025.12.5/1.jpg",
+                        date: "2025年3月15日",
+                        description: "24届副会长"
+                    },
+                    {
+                        src: "images/2025.12.5/2.jpg",
+                        date: "2025年3月15日",
+                        description: "小东西"
+                    },
+                     {
+                        src: "images/2025.12.5/3.jpg",
+                        date: "2025年3月15日",
+                        description: "副会长的月亮"
+                    },
+                     {
+                        src: "images/2025.12.5/4.png",
+                        date: "2025年3月15日",
+                        description: "小东西的月亮"
+                    },
+                     {
+                        src: "images/2025.12.5/5.jpg",
+                        date: "2025年3月15日",
+                        description: "《十字星芒》"
+                    },
+                     {
+                        src: "images/2025.12.5/6.jpg",
+                        date: "2025年3月15日",
+                        description: "手机拍出来的月亮"
+                    },
+
+                ]
+            },
+            {
+                title: "",
+                date: "",
+                description: "尝试星轨",
+                photos: [
+                    {
+                        src: "images/6c57f9076fdb0f8fafe8f7bacb623f3b.png",
+                        date: "2025年6月13日",
+                        description: ""
+                    },
+                    {
+                        src: "images/default.png",
+                        date: "2025年8月",
+                        description: ""
+                    }
+                ]
+            },
+            {
+                title: "2024年摆摊",
+                date: "2024.9.17",
+                description: "",
+                photos: [
+                    {
+                        src: "images/2024.9.17摆摊/摆摊/1.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/2024.9.17摆摊/摆摊/2.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/2024.9.17摆摊/摆摊/5.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/2024.9.17摆摊/摆摊/3.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "images/2024.9.17摆摊/摆摊/4.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "images/2024.9.17摆摊/摆摊/6.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                ]
+            },
+             {
+                title: "帅气的陈辰",
+                date: "2025年7月22日",
+                description: "偷偷夹带点私货，嘻嘻",
+                photos: [
+                    {
+                        src: "images/363901E9760200A73A9A7C9A2E58A677.jpg",
+                        date: "不知道什么时候拍的",
+                        description: "帅气的23届会长陈辰"
+                    },
+                    {
+                        src: "images/64ee33816355f9e0b951b90ef2cbe8ed.jpg",
+                        date: "",
+                        description: "西南石油的王"
+                    },
+                    {
+                        src: "images/48e0b898991dd275db3e2c05fa977726.jpg",
+                        date: "不知道什么时候拍的",
+                        description: "西南石油的王"
+                    },
+                ]
+            }
+        ];
+        
+        // 天文摄影工作坊活动照片数据
+        const astroPhotographyPhotos = [
+            {
+                title: "川南攀枝花天文台",
+                date: "2025年2月22日",
+                description: "联合活动",
+                photos: [
+                    {
+                        src: "images/134A94046B8131002C88C5F36DC4FEA2.jpg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/947d2e4720a0a7db3de0dca1694e0d76.jpg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/80dcd8ec9942ed21219168ad69ea4002.jpg",
+                          date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/6a1985f5de281cdf86c0237fdf815f88.jpg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/f372afca640a4ebf5f797a605d16cdd1.jpg",
+                        date: "",
+                        description: ""
+                    },
+                      {
+                        src: "images/e035da3e14c2df90a9e3b97d1c3df108.jpg",
+                        date: "",
+                        description: ""
+                    }
+                   
+                ]
+            },
+
+         {
+                title: "川渝天协外出活动",
+                date: "2023年10月7号",
+                description: "",
+                photos: [
+                    {
+                        src: "images/川渝天协外出活动/新建文件夹/6.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                   {
+                        src: "images/川渝天协外出活动/新建文件夹/1.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/川渝天协外出活动/新建文件夹/2.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "images/川渝天协外出活动/新建文件夹/3.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/川渝天协外出活动/新建文件夹/4.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "images/川渝天协外出活动/新建文件夹/5.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "images/川渝天协外出活动/新建文件夹/9.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                     {
+                        src: "images/川渝天协外出活动/新建文件夹/8.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/川渝天协外出活动/新建文件夹/13.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                ]
+            },
+            {
+                title: "川师游园",
+                date: "",
+                description: "四川师范大学游园活动",
+                photos: [
+                    {
+                        src: "images/d9d8ec734a5fc774077038211ac749c1.jpg",
+                        date: "2024年4月20日",
+                        description: "游川师"
+                    },
+                    {
+                        src: "images/E8AD2E22FA6CCA3918C7DBCD67E6383B.jpg",
+                        date: "2025年5月18日",
+                        description: "每年例行游川师"
+                    },
+                    {
+                        src: "images/E80133155FD14C6FD1DD988B6A7B03BB.jpg",
+                        date: "2025年5月18日",
+                        description: "游川师的合照"
+                    }
+                ]
+            },
+            {
+                title: "成信百团大战",
+                date: "2025年9月28号",
+                description: "成都信息工程大学百团大战",
+                photos: [
+                    {
+                        src: "images/989bb9fe14294443ad709f9126a90378.jpg",
+                        date: "",
+                        description: "成信合照"
+                    }
+                ]
+            },
+
+            {
+                title: "出游红原县",
+                date: "2024年4月4日",
+                description: "红原县",
+                photos: [
+                   
+                    {
+                        src: "images/ED12F7118976D344995F94A17A30ADC9.jpg",
+                        date: "2024年4月4日",
+                        description: "2024年清明红原县，乌云密布，晚上只有半小时晴空时间，只看了雪山"
+                    },
+                     
+                    
+                ]
+            },
+            {
+                title: "夜登龙泉山",
+                date: "2024年11月",
+                description: "",
+                photos: [
+                    {
+                        src: "images/D6542BEFECA318D771BE9768E648D4EC.jpg",
+                        date: "2024年11月",
+                        description: ""
+                    }
+                    
+                ]
+            },
+            {
+                title: "游川大",
+                date: "",
+                description: "",
+                photos: [
+                    {
+                        src: "images/433C5C84A658B32DF285A8B04C2DBEF1.jpg",
+                        date: "",
+                        description: "四川大学天文社二十周年纪念活动"
+                    },
+                    {
+                        src: "images/游川大/NR8AVjViQ1FBMk5ERXdOREkzTnpiREFpeGxPNlYuQ1EhIQUAcXVuZ3o!.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/游川大/NR8AVjViQ1FBMk5ERXdOREkzTnpiS0FpeGxVcmM2Q1EhIQUAcXVuZ3o!.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/游川大/NR8AVjViQ1FBMk5ERXdOREkzTnpiRUFpeGxjUjEuQ1EhIQUAcXVuZ3o!.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    {
+                        src: "images/游川大/NR8AVjViQ1FBMk5ERXdOREkzTnpiSEFpeGxTSlZEQ1EhIQUAcXVuZ3o!.jpeg",
+                        date: "",
+                        description: ""
+                    },
+                    
+                   
+                ]
+            },
+        ];
+        
+        // 天文讲座系列活动照片数据
+        const lectureSeriesPhotos = [
+            {
+                title: "天文讲座",
+                date: "",
+                description: "",
+                photos: [
+                    {
+                        src: "images/581F06C43867035E3B2B9A6E19536386.jpg",
+                        date: "XXX年",
+                        description: "23届会长陈辰"
+                    }
+                
+                ]
+            },
+            {
+                title: "星图ing",
+                date: "",
+                description: "尝试拼出所有星座ing。",
+                photos: [
+                    {
+                        src: "images/1e627dd12ca5cc1809ea9e63fddfa0ce.jpg",
+                        date: "",
+                        description: "飞马座"
+                    },
+                    {
+                        src: "images/社团活动/群相册/NRMAVjN0V0lrMUpwM2tabHVDWHhRQgUAcXVuZ3o!.jpeg",
+                        date: "",
+                        description: "天鹅座左下、天琴座右上，织女星在天琴座最上方。"
+                    }
+                ]
+            },
+            {
+                title: "历代会长",
+                date: "",
+                description: "",
+                photos: [
+                    {
+                        src: "images/363901E9760200A73A9A7C9A2E58A677.jpg",
+                        date: "2024",
+                        description: "23届会长-陈辰"
+                    },
+                    {
+                        src: "会长/微信图片_20260102201426_3_2.jpg",
+                        date: "2025",
+                        description: "24届会长-袁明杰"
+                    },
+                    {
+                        src: "会长/微信图片_20260102203242_5_2.jpg",
+                        date: "2025",
+                        description: "24届会长-黄海"
+                    },
+                ]
+            },
+            
+        ];
+
+        // 通用的活动照片渲染函数（在DOMContentLoaded内部）
+        function renderActivityGallery(activityId, page = 1) {
+            console.log('渲染活动画廊:', activityId, '页码:', page);
+            
+            // 更新分页状态
+            paginationState.currentPage = page;
+            paginationState.currentActivity = activityId;
+            
+            // 根据活动ID选择对应的数据
+            let photosData, containerId, paginationId;
+            
+            switch(activityId) {
+                case 'star-gazing':
+                    photosData = starGazingPhotos;
+                    containerId = 'star-gazing-gallery';
+                    paginationId = 'star-gazing-pagination';
+                    break;
+                case 'astro-photography':
+                    photosData = astroPhotographyPhotos;
+                    containerId = 'astro-photography-gallery';
+                    paginationId = 'astro-photography-pagination';
+                    break;
+                case 'lecture-series':
+                    photosData = lectureSeriesPhotos;
+                    containerId = 'lecture-series-gallery';
+                    paginationId = 'lecture-series-pagination';
+                    break;
+                default:
+                    console.error('未知的活动ID:', activityId);
+                    return;
+            }
+            
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error('找不到容器:', containerId);
+                return;
+            }
+            
+            // 如果没有照片数据，显示提示信息
+            if (!photosData || photosData.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #a0a0ff;">暂无活动照片</p>';
+                
+                // 隐藏分页控件
+                const paginationContainer = document.getElementById(paginationId);
+                if (paginationContainer) {
+                    paginationContainer.innerHTML = '';
+                }
+                return;
+            }
+            
+            // 计算当前页的活动
+            const startIndex = (page - 1) * paginationState.itemsPerPage;
+            const endIndex = Math.min(startIndex + paginationState.itemsPerPage, photosData.length);
+            const currentActivities = photosData.slice(startIndex, endIndex);
+            
+            console.log('总活动数:', photosData.length, '当前页活动:', currentActivities.length);
+            
+            container.innerHTML = '';
+            
+            currentActivities.forEach(activity => {
+                const activityElement = document.createElement('div');
+                activityElement.className = 'activity-session';
+                
+                activityElement.innerHTML = `
+                    <div class="session-header">
+                        <h4 class="session-title">${activity.title}</h4>
+                        <div class="session-date">${activity.date}</div>
+                    </div>
+                    <p class="session-description">${activity.description}</p>
+                    <div class="photos-grid">
+                        ${activity.photos.map(photo => `
+                            <div class="photo-item" data-src="${photo.src}" data-date="${photo.date}" data-description="${photo.description}">
+                                <img class="photo-image" src="${photo.src}" alt="${photo.description}" loading="lazy">
+                                <div class="photo-caption">
+                                    <div class="photo-date">${photo.date}</div>
+                                    <div class="photo-description">${photo.description}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                container.appendChild(activityElement);
+            });
+            
+            // 更新分页控件
+            renderPaginationControls(activityId, page, photosData.length);
+            
+            // 添加图片点击事件
+            addImageClickEvents();
+            
+            // 滚动到照片区域顶部
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // 监听分页变化事件
+        document.addEventListener('paginationChange', function(event) {
+            const { activityId, page } = event.detail;
+            renderActivityGallery(activityId, page);
+        });
+
+        // 图片模态框功能
+let currentImageIndex = 0;
+let currentPhotoList = [];
+
+function addImageClickEvents() {
+    const photoItems = document.querySelectorAll('.photo-item');
+    
+    photoItems.forEach((item, index) => {
+        item.addEventListener('click', function() {
+            const gallery = this.closest('.photos-grid');
+            const allPhotos = Array.from(gallery.querySelectorAll('.photo-item'));
+            
+            // 获取当前照片和所有照片信息
+            const currentPhoto = {
+                src: this.getAttribute('data-src'),
+                date: this.getAttribute('data-date'),
+                description: this.getAttribute('data-description'),
+                alt: this.querySelector('img').alt
+            };
+            
+            // 构建当前活动中的所有照片列表
+            currentPhotoList = allPhotos.map(photo => ({
+                src: photo.getAttribute('data-src'),
+                date: photo.getAttribute('data-date'),
+                description: photo.getAttribute('data-description'),
+                alt: photo.querySelector('img').alt
+            }));
+            
+            // 找到当前点击的照片在列表中的索引
+            currentImageIndex = allPhotos.findIndex(photo => 
+                photo.getAttribute('data-src') === currentPhoto.src
+            );
+            
+            // 显示模态框并加载当前图片
+            openModal(currentPhoto);
+        });
+    });
+}
+
+function openModal(photo) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    
+    modalImage.src = photo.src;
+    modalImage.alt = photo.alt;
+    modalCaption.innerHTML = `
+        <div class="photo-date">${photo.date}</div>
+        <div class="photo-description">${photo.description}</div>
+    `;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // 防止背景滚动
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // 恢复背景滚动
+}
+
+function showPrevImage() {
+    if (currentPhotoList.length === 0) return;
+    
+    currentImageIndex = (currentImageIndex - 1 + currentPhotoList.length) % currentPhotoList.length;
+    const photo = currentPhotoList[currentImageIndex];
+    
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    
+    modalImage.src = photo.src;
+    modalImage.alt = photo.alt;
+    modalCaption.innerHTML = `
+        <div class="photo-date">${photo.date}</div>
+        <div class="photo-description">${photo.description}</div>
+    `;
+}
+
+function showNextImage() {
+    if (currentPhotoList.length === 0) return;
+    
+    currentImageIndex = (currentImageIndex + 1) % currentPhotoList.length;
+    const photo = currentPhotoList[currentImageIndex];
+    
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    
+    modalImage.src = photo.src;
+    modalImage.alt = photo.alt;
+    modalCaption.innerHTML = `
+        <div class="photo-date">${photo.date}</div>
+        <div class="photo-description">${photo.description}</div>
+    `;
+}
+
+// 初始化模态框事件监听器
+function initModalEvents() {
+    // 关闭按钮
+    const closeButton = document.getElementById('closeModal');
+    if (closeButton) {
+        closeButton.addEventListener('click', closeModal);
+    }
+    
+    // 上一张按钮
+    const prevButton = document.getElementById('prevButton');
+    if (prevButton) {
+        prevButton.addEventListener('click', showPrevImage);
+    }
+    
+    // 下一张按钮
+    const nextButton = document.getElementById('nextButton');
+    if (nextButton) {
+        nextButton.addEventListener('click', showNextImage);
+    }
+    
+    // 点击模态框背景关闭
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // 键盘导航支持
+    document.addEventListener('keydown', function(event) {
+        const modal = document.getElementById('imageModal');
+        if (modal.style.display === 'flex') {
+            switch(event.key) {
+                case 'Escape':
+                    closeModal();
+                    break;
+                case 'ArrowLeft':
+                    showPrevImage();
+                    break;
+                case 'ArrowRight':
+                    showNextImage();
+                    break;
+            }
+        }
+    });
+}
+
+        // 活动卡片点击事件
+        const activityCards = document.querySelectorAll('.activity-card');
+        const activityDetail = document.getElementById('activity-detail');
+        const detailTitle = document.getElementById('detail-title');
+        const detailImage = document.getElementById('detail-image');
+        const detailText = document.getElementById('detail-text');
+        const backButton = document.getElementById('back-button');
+
+        activityCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const activityId = this.getAttribute('data-activity');
+                const activity = activityData[activityId];
+                
+                if (activity) {
+                    // 更新详情页面内容
+                    detailTitle.textContent = activity.title;
+                    detailImage.style.backgroundImage = `url('${activity.image}')`;
+                    detailText.innerHTML = activity.content;
+                    
+                    // 显示详情页面，隐藏其他部分
+                    document.getElementById('home').style.display = 'none';
+                    document.getElementById('features').style.display = 'none';
+                    document.getElementById('activities').style.display = 'none';
+                    activityDetail.style.display = 'block';
+                    
+                    // 使用setTimeout确保DOM已更新，然后渲染对应活动的照片
+                    setTimeout(() => {
+                        renderActivityGallery(activityId, 1);
+                    }, 0);
+                    
+                    // 滚动到顶部
+                    window.scrollTo(0, 0);
+                }
+            });
+        });
+        
+        // 修复返回按钮功能
+        backButton.addEventListener('click', function() {
+            // 隐藏详情页面，显示其他部分
+            activityDetail.style.display = 'none';
+            document.getElementById('home').style.display = 'flex';
+            document.getElementById('features').style.display = 'block';
+            document.getElementById('activities').style.display = 'block';
+            
+            // 滚动到活动区域
+            document.getElementById('activities').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
+</body>
+</html>
